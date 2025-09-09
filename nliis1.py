@@ -1,4 +1,4 @@
-
+import datetime
 
 class Document:
     _next_id = 1  # id autoincrement
@@ -16,26 +16,35 @@ class Indexer:
         self.document_base = {}
 
 
-    @staticmethod
-    def get_document_vector(): # 2.1-2.2 2.1 main function, here we create vector from raw document
+    def get_document_vector(self): # 2.1-2.2 2.1 main function, here we create vector from raw document
         pass
 
-    @staticmethod
-    def add_document_to_base(): # 1. open file, create Document instance
+    def add_document_to_base(self, filepath: str): # 1. open file, create Document instance
+        with open(filepath, "r", encoding="utf-8") as f:
+            text = f.read()
+        
+        title = filepath.split("/")[-1]
+        
+        datetime_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        doc = Document(title, text, datetime_str)
+
+        self.document_base[doc.document_id] = doc
+
+        return
+
+    def get_lemm_inverse_frequency(self): # 2.2 IDF
         pass
 
-    @staticmethod
-    def get_lemm_inverse_frequency(): # 2.2 IDF
+    def get_word_weight_in_document(self): # 2.2
         pass
 
-    @staticmethod
-    def get_word_weight_in_document(): # 2.2
+    def get_lemm_weight_in_document(self): # 2.2
         pass
 
-    @staticmethod
-    def get_lemm_weight_in_document(): # 2.2
+    def del_document_from_base(self): # 3.
         pass
 
-    @staticmethod
-    def del_document_from_base(): # 3.
-        pass
+index_machine = Indexer()
+
+index_machine.add_document_to_base("texts/parks.txt")
