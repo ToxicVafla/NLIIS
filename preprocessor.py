@@ -1,3 +1,5 @@
+"""Модуль, отвечающий за предобработку текстов"""
+
 import os
 import re
 from pymorphy3 import MorphAnalyzer
